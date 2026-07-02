@@ -1,0 +1,17 @@
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Environment variables 
+.env
+
+# Virtual Environment
+venv/
+.venv/
+
+# Local databases
+*.db
+*.sqlite3
+
+# PDF data samples
+data_samples/
