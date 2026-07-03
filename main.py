@@ -5,6 +5,7 @@ Usage:
     python main.py parse                 Parse ALL PDFs in data_samples/
     python main.py parse <file.pdf>      Parse a single PDF file
     python main.py chat                  Start the interactive sales agent
+    python main.py web                   Start the Mos3ad web UI
 """
 
 import sys
@@ -52,6 +53,11 @@ def main():
     elif command == "chat":
         from src.agent import start_chat
         start_chat()
+
+    elif command == "web":
+        import uvicorn
+        print("\n🏛️  Starting Mos3ad Elite Concierge Web UI...")
+        uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
 
     else:
         print(f"❌ Unknown command: {command}")

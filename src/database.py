@@ -200,5 +200,70 @@ def search_properties(
     return "\n---\n".join(summaries)
 
 
+def search_properties_json(
+    location_keyword: str = "",
+    unit_type: str = "",
+    max_budget: float = 0,
+    max_delivery_year: int = 0,
+    bedrooms: str = ""
+) -> list[dict]:
+    """
+    Search properties and return structured dictionaries for the web UI.
+    Uses the same filtering logic as search_properties but returns rich data
+    for rendering PropertyShowcaseCards.
+    """
+    conn = _get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        SELECT p.name, p.developer, p.location,
+               u.unit_type, u.bedrooms, u.area_sqm,
+               u.starting_price, u.down_payment_pct,
+               u.installment_years, u.delivery_year, u.payment_plan
+        FROM units u
+        JOIN projects p ON u.project_id = p.id
+        WHERE 1=1
+    """
+    params = []
+
+    if location_keyword:
+        query += " AND p.location LIKE ?"
+        params.append(f"%{location_keyword}%")
+    if unit_type:
+        query += " AND u.unit_type LIKE ?"
+        params.append(f"%{unit_type}%")
+    if max_budget > 0:
+        query += " AND u.starting_price > 0 AND u.starting_price <= ?"
+        params.append(max_budget)
+    if max_delivery_year > 0:
+        query += " AND u.delivery_year <= ?"
+        params.append(max_delivery_year)
+    if bedrooms:
+        query += " AND u.bedrooms LIKE ?"
+        params.append(f"%{bedrooms}%")
+
+    query += " ORDER BY u.starting_price ASC"
+    cursor.execute(query, params)
+    results = cursor.fetchall()
+    conn.close()
+
+    properties = []
+    for row in results:
+        properties.append({
+            "project_name": row[0],
+            "developer": row[1],
+            "location": row[2],
+            "unit_type": row[3],
+            "bedrooms": row[4],
+            "area_sqm": row[5],
+            "starting_price": row[6],
+            "down_payment_pct": row[7],
+            "installment_years": row[8],
+            "delivery_year": row[9],
+            "payment_plan": row[10],
+        })
+    return properties
+
+
 # Auto-initialize the database on module import
 init_db()

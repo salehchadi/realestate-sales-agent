@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mos3ad — Your elite AI real estate concierge. Discover luxury properties with personalized recommendations from Egypt's finest developments.">
+    <meta name="theme-color" content="#0B0C10">
+    <title>Mos3ad — Elite Real Estate Concierge</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+</head>
+<body>
+    <!-- LuxuryLayout -->
+    <div class="luxury-layout" id="luxury-layout">
+
+        <!-- Brand Bar -->
+        <header class="brand-bar" id="brand-bar">
+            <div class="brand-logo">
+                <span class="brand-name">Mos3ad</span>
+                <span class="brand-tagline">Elite Real Estate Concierge</span>
+            </div>
+        </header>
+
+        <!-- ConciergeCanvas — Chat Area -->
+        <main class="concierge-canvas" id="concierge-canvas">
+
+            <!-- Welcome Screen (shown before first message) -->
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-monogram">
+                    <span class="welcome-monogram-letter">M</span>
+                </div>
+                <h1 class="welcome-title">Welcome to Mos3ad</h1>
+                <p class="welcome-subtitle">
+                    Your private wealth and property advisor. I specialize in Egypt's most prestigious developments — from North Coast retreats to New Cairo residences.
+                </p>
+                <div class="welcome-suggestions" id="welcome-suggestions">
+                    <button class="suggestion-chip" data-query="Show me luxury villas on the North Coast">North Coast Villas</button>
+                    <button class="suggestion-chip" data-query="What apartments do you have under 5 million EGP?">Under 5M EGP</button>
+                    <button class="suggestion-chip" data-query="Compare 2-bedroom and 3-bedroom units">Compare Bedrooms</button>
+                    <button class="suggestion-chip" data-query="What payment plans are available?">Payment Plans</button>
+                </div>
+            </div>
+
+            <!-- Messages will be injected here -->
+            <div id="messages-container"></div>
+
+        </main>
+
+        <!-- EliteInputArea -->
+        <div class="elite-input-area" id="elite-input-area">
+            <div class="input-container" id="input-container">
+                <div class="thinking-pulse" id="thinking-pulse"></div>
+                <textarea
+                    id="chat-input"
+                    rows="1"
+                    placeholder="Inquire about your next property... استعلم عن عقارك القادم"
+                    aria-label="Type your message"
+                ></textarea>
+                <button class="send-button" id="send-button" aria-label="Send message">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
