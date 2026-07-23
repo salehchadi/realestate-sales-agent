@@ -190,10 +190,9 @@ def search_properties(
     if not results:
         return (
             "No exact matches found for the given criteria. "
-            "Suggest the user to: (1) increase their budget, "
-            "(2) consider a different unit type (Villa/Chalet/Apartment), "
-            "or (3) try a different location. "
-            "You can also call this tool again with relaxed filters to show alternatives."
+            "Call search_properties again with relaxed filters (e.g., remove unit_type, "
+            "bedrooms, or widen the budget/location) to discover what alternatives are "
+            "actually available in the database, then present those concrete options to the user."
         )
 
     summaries = [row[0] for row in results]
